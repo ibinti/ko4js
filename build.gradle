@@ -1,0 +1,73 @@
+buildscript {
+    ext {
+        kotlin_version = "1.2.70"
+    }
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+apply plugin: "kotlin2js"
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url("http://dl.bintray.com/kotlin/kotlinx.html/")
+    }
+}
+
+dependencies {
+    compile("org.jetbrains.kotlinx:kotlinx-html-js:0.6.3")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version")
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core-js:0.22.3'
+}
+
+defaultTasks "ko4js"
+build.doLast {
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/js"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+            }
+        }
+    }
+}
+task uglifyjs(type: Exec) {
+    commandLine "uglifyjs", "js/kotlin.js", "js/kotlinx-coroutines-core-js.js", "js/kotlinx-html-js.js", "js/ko4js.js", "-b", "-o", "js/ko4js.core.js"
+}
+
+task ko4js {
+    dependsOn build, uglifyjs
+    uglifyjs.mustRunAfter build
+}
+compileKotlin2Js {
+    kotlinOptions.outputFile = "${projectDir}/js/ko4js.js"
+    kotlinOptions.moduleKind = "plain"
+    kotlinOptions.sourceMap = false
+    kotlinOptions.sourceMapEmbedSources = "never"
+    kotlinOptions.metaInfo = false
+}
+
+clean {
+    delete "js"
+}
+
+task wrapper(type: Wrapper,overwrite: true) {
+    gradleVersion = "5.0"
+    distributionType = Wrapper.DistributionType.ALL
+}
