@@ -16,13 +16,13 @@ apply plugin: "kotlin-dce-js"
 
 repositories {
     mavenCentral()
-    maven {
-        url("http://dl.bintray.com/kotlin/kotlinx.html/")
-    }
+    // maven {
+    //     url("http://dl.bintray.com/kotlin/kotlinx.html/")
+    // }
 }
 
 dependencies {
-    compile("org.jetbrains.kotlinx:kotlinx-html-js:0.6.3")
+    //compile("org.jetbrains.kotlinx:kotlinx-html-js:0.6.3")
     compile("org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version")
 }
 
