@@ -4,9 +4,12 @@ package okoko
 external fun jQuery(selector: Any?): Unit
 
 fun log(){
-    println("printed from Kotlin for JavaScript!")
+    println("log from Kotlin for JavaScript!")
 }
-fun ko_2_int(time:dynamic):Int {
+fun jtext(selector:Any,txt:Any) {
+    jQuery(selector).asDynamic().text(txt)
+}
+fun ko_2_int(time:Any):Int {
     return "$time".toDouble().toInt()
 }
 
