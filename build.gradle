@@ -12,12 +12,7 @@ buildscript {
 }
 
 apply plugin: "kotlin2js"
-
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
+apply plugin: "kotlin-dce-js"
 
 repositories {
     mavenCentral()
@@ -29,10 +24,11 @@ repositories {
 dependencies {
     compile("org.jetbrains.kotlinx:kotlinx-html-js:0.6.3")
     compile("org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version")
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core-js:0.22.3'
 }
 
 defaultTasks "ko4js"
+assemble.dependsOn runDceKotlinJs
+
 build.doLast {
     configurations.compile.each { File file ->
         copy {
@@ -47,14 +43,15 @@ build.doLast {
         }
     }
 }
+runDceKotlinJs.keep "ko4js.okoko.log"
 
 task uglifyjs(type: Exec) {
-    commandLine "uglifyjs", "js/kotlin.js", "js/kotlinx-coroutines-core-js.js", "js/kotlinx-html-js.js", "js/ko4js.js", "-b", "-o", "js/ko4js.core.js"
+    commandLine "uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "js/ko4js.core.js"
 }
 
 task ko4js {
-    dependsOn build, uglifyjs
-    uglifyjs.mustRunAfter build
+    dependsOn build, uglifyjs, runDceKotlinJs
+    uglifyjs.mustRunAfter runDceKotlinJs
 }
 compileKotlin2Js {
     kotlinOptions.outputFile = "${projectDir}/js/ko4js.js"
