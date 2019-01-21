@@ -44,7 +44,7 @@ build.doLast {
     }
 }
 //Note that if your function has parameters, its name will be mangled, so the mangled name should be used in the keep directive.
-runDceKotlinJs.keep "ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$","ko4js.okoko.boombayah"
+runDceKotlinJs.keep "ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$"
 
 task uglifyjs(type: Exec) {
     commandLine "uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "js/ko4js.core.js"
