@@ -25,4 +25,5 @@ fun ko_2_int(time:Any):Int {
 
 fun main(args: Array<String>) {
     println("Welcome to Kotlin for JavaScript!")
+    boombayah()
 }
