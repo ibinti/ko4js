@@ -3,7 +3,7 @@ import kotlin.browser.document
 import kotlin.browser.window
 external fun jQuery(selector: dynamic): dynamic = definedExternally
 
-fun log(){
+fun log() {
     println("log from Kotlin for JavaScript!")
 }
 
