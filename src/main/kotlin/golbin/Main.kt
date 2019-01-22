@@ -14,7 +14,7 @@ fun jtext(selector:dynamic,txt:dynamic) {
 fun boombayah() {
     jQuery(document).ready({
         jQuery("p").click( { jtext("p","Thank You, Sir!") })
-        jtext("p","If you click on me, You will be mesmerized.")
+        jtext("p","If you click on me, you will be mesmerized.")
     })
 }
 
