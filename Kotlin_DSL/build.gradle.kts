@@ -2,10 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins {
     id("kotlin2js") version "1.3.11"
+    id("kotlin-dce-js") version "1.3.11"
 }
 
 dependencies {
-    compile(kotlin("stdlib-js"))
+    implementation(kotlin("stdlib-js"))
 }
 
 repositories {
@@ -16,7 +17,8 @@ tasks {
     compileKotlin2Js {
         kotlinOptions {
             outputFile = "${sourceSets.main.get().output.resourcesDir}/output.js"
-            sourceMap = true
+            sourceMap = false
+            metaInfo = false
         }
     }
     val unpackKotlinJsStdlib by registering {
@@ -47,6 +49,14 @@ tasks {
             exclude("**/*.kjsm")
         }
         into("$buildDir/web")
+    }
+    val ibinti by registering {
+        doLast {
+            println("ibinti")
+        }
+    }
+    assembleWeb {
+        dependsOn(ibinti)
     }
     assemble {
         dependsOn(assembleWeb)
