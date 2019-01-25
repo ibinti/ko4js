@@ -24,6 +24,7 @@ tasks {
     val unpackKotlinJsStdlib by registering {
         group = "build"
         description = "Unpack the Kotlin JavaScript standard library"
+        
         val outputDir = file("$buildDir/$name")
         inputs.property("compileClasspath", configurations.compileClasspath.get())
         outputs.dir(outputDir)
@@ -44,6 +45,7 @@ tasks {
         group = "build"
         description = "Assemble the web application"
         includeEmptyDirs = false
+        dependsOn("runDceKotlinJs")
         from(unpackKotlinJsStdlib)
         from(sourceSets.main.get().output) {
             exclude("**/*.kjsm")
@@ -61,4 +63,5 @@ tasks {
     assemble {
         dependsOn(assembleWeb)
     }
+    
 }
