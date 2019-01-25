@@ -24,7 +24,6 @@ tasks {
     val unpackKotlinJsStdlib by registering {
         group = "build"
         description = "Unpack the Kotlin JavaScript standard library"
-        
         val outputDir = file("$buildDir/$name")
         inputs.property("compileClasspath", configurations.compileClasspath.get())
         outputs.dir(outputDir)
@@ -52,16 +51,7 @@ tasks {
         }
         into("$buildDir/web")
     }
-    val ibinti by registering {
-        doLast {
-            println("ibinti")
-        }
-    }
-    assembleWeb {
-        dependsOn(ibinti)
-    }
     assemble {
         dependsOn(assembleWeb)
     }
-    
 }
