@@ -17,7 +17,8 @@ defaultTasks("uglifyjs")
 
 tasks {
     register<Exec>("uglifyjs") {
-        dependsOn(build)
+        //dependsOn(build)
+        dependsOn("runDceKotlinJs")
         /*
         uglifyjs is installed on the system with npm 
         */
@@ -56,7 +57,6 @@ tasks {
         group = "build"
         description = "Assemble the web application"
         includeEmptyDirs = false
-        dependsOn("runDceKotlinJs")
         from(unpackKotlinJsStdlib)
         from(sourceSets.main.get().output) {
             exclude("**/*.kjsm")
