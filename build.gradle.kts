@@ -25,6 +25,12 @@ tasks {
         commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "build/kotlin-js-min/main/ko4js.core.js")
         // commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-b", "-o", "js/ko4js.core.js") 
     }
+    // runDceKotlinJs {
+    //     keep "ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$"
+    //     dceOptions {
+    //         devMode = false
+    //     }
+    // }
     compileKotlin2Js {
         kotlinOptions {
             outputFile = "${sourceSets.main.get().output.resourcesDir}/ko4js.js"

@@ -5,7 +5,7 @@ external fun jQuery(selector: dynamic): dynamic = definedExternally
 
 fun log() {
     println("log from Kotlin for JavaScript!")
-    //you_shoud_not_see_me()
+    you_shoud_not_see_me()
 }
 
 fun jtext(selector:dynamic,txt:dynamic) {
@@ -26,4 +26,5 @@ fun boombayah() {
 fun main(args: Array<String>) {
     println("Welcome to Kotlin for JavaScript!")
     boombayah()
+    log()
 }
