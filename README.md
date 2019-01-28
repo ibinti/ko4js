@@ -12,4 +12,4 @@ To build the project, simply run ./gradlew.
 
 Live Demo
 
-index: https://cloud.ibinti.com/file/ko4js/ko4js.html
+ko4js: https://cloud.ibinti.com/file/ko4js/ko4js.html
