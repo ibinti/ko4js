@@ -1,19 +1,19 @@
 package okoko
 import kotlin.browser.document
 import kotlin.browser.window
-external fun jQuery(selector: dynamic): dynamic = definedExternally
+external val jQuery: dynamic = definedExternally
 
 fun log() {
     println("log from Kotlin for JavaScript!")
     //you_shoud_not_see_me()
 }
 
-fun jtext(selector:dynamic,txt:dynamic) {
+fun jtext(selector:String,txt:String) {
     jQuery(selector).text(txt)
 }
 
 @JsName("no_mangle")
-fun jtext_jsname(selector:dynamic,txt:dynamic) {
+fun jtext_jsname(selector:String,txt:String) {
     jQuery(selector).text(txt)
 }
 

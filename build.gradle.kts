@@ -27,8 +27,7 @@ tasks {
         /*
         uglifyjs is installed on the system with npm 
         */
-        commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "build/kotlin-js-min/main/ko4js.core.js")
-        // commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-b", "-o", "js/ko4js.core.js")
+        commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "build/kotlin-js-min/main/ko4js.min.js")
     }
     
     compileKotlin2Js {
