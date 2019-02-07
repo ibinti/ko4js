@@ -8,12 +8,7 @@ fun log() {
     //you_shoud_not_see_me()
 }
 
-fun jtext(selector:String,txt:String) {
-    jQuery(selector).text(txt)
-}
-
-@JsName("no_mangle")
-fun jtext_jsname(selector:String,txt:String) {
+@JsName("jtext") fun jtext(selector:String,txt:String) {
     jQuery(selector).text(txt)
 }
 

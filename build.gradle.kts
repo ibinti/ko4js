@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins {
-    id("kotlin2js") version "1.3.20"
-    id("kotlin-dce-js") version "1.3.20"
+    id("kotlin2js") version "1.3.21"
+    id("kotlin-dce-js") version "1.3.21"
 }
 
 dependencies {
@@ -18,12 +18,12 @@ defaultTasks("uglifyjs")
 tasks {
     
     runDceKotlinJs {
-        //If the function has parameters, its name will be mangled, so the mangled name should be used in the keep directive. However if @JsName is used for the function name, use JsName instead so that no more mangled name is necessary.
-        keep("ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$", "ko4js.okoko.no_mangle")
+        //If the function has parameters, its name will be mangled, so the mangled name should be used in the keep directive. However if @JsName is used for the function name, use JsName instead so that no mangled name is necessary.
+        keep("ko4js.okoko.log", "ko4js.okoko.jtext")
     }
 
     register<Exec>("uglifyjs") {
-        dependsOn("runDceKotlinJs")
+        dependsOn(runDceKotlinJs)
         /*
         uglifyjs is installed on the system with npm 
         */
