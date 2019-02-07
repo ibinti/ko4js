@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlin_version = "1.3.11"
+        kotlin_version = "1.3.20"
     }
     repositories {
         mavenCentral()
@@ -39,8 +39,9 @@ build.doLast {
     }
 }
 //Note that if your function has parameters, its name will be mangled, so the mangled name should be used in the keep directive.
-runDceKotlinJs.keep "ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$"
-
+runDceKotlinJs {
+    keep ("ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$")
+}
 /*
 uglifyjs is installed on the system with npm 
 */
@@ -66,7 +67,4 @@ clean {
     delete "js"
 }
 
-task wrapper(type: Wrapper,overwrite: true) {
-    gradleVersion = "5.1"
-    distributionType = Wrapper.DistributionType.ALL
-}
+//./gradlew wrapper --gradle-version 5.2 --distribution-type all

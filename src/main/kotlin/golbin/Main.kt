@@ -12,6 +12,11 @@ fun jtext(selector:dynamic,txt:dynamic) {
     jQuery(selector).text(txt)
 }
 
+@JsName("no_mangle")
+fun jtext_jsname(selector:dynamic,txt:dynamic) {
+    jQuery(selector).text(txt)
+}
+
 fun you_shoud_not_see_me() {
     println("I see you!")
 }

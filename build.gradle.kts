@@ -16,21 +16,21 @@ repositories {
 defaultTasks("uglifyjs")
 
 tasks {
+    
+    runDceKotlinJs {
+        //If the function has parameters, its name will be mangled, so the mangled name should be used in the keep directive. However if @JsName is used for the function name, use JsName instead so that no more mangled name is necessary.
+        keep("ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$","ko4js.okoko.no_mangle")
+    }
+
     register<Exec>("uglifyjs") {
-        //dependsOn(build)
         dependsOn("runDceKotlinJs")
         /*
         uglifyjs is installed on the system with npm 
         */
         commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "build/kotlin-js-min/main/ko4js.core.js")
-        // commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-b", "-o", "js/ko4js.core.js") 
+        // commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-b", "-o", "js/ko4js.core.js")
     }
-    // runDceKotlinJs {
-    //     keep "ko4js.okoko.log", "ko4js.okoko.jtext_wn2jw4\$"
-    //     dceOptions {
-    //         devMode = false
-    //     }
-    // }
+    
     compileKotlin2Js {
         kotlinOptions {
             outputFile = "${sourceSets.main.get().output.resourcesDir}/ko4js.js"
@@ -40,36 +40,6 @@ tasks {
             metaInfo = false
         }
     }
-    // val unpackKotlinJsStdlib by registering {
-    //     group = "build"
-    //     description = "Unpack the Kotlin JavaScript standard library"
-    //     val outputDir = file("$buildDir/$name")
-    //     inputs.property("compileClasspath", configurations.compileClasspath.get())
-    //     outputs.dir(outputDir)
-    //     doLast {
-    //         val kotlinStdLibJar = configurations.compileClasspath.get().single {
-    //             it.name.matches(Regex("kotlin-stdlib-js-.+\\.jar"))
-    //         }
-    //         copy {
-    //             includeEmptyDirs = false
-    //             from(zipTree(kotlinStdLibJar))
-    //             into(outputDir)
-    //             include("**/*.js")
-    //             exclude("META-INF/**")
-    //         }
-    //     }
-    // }
-    // val assembleWeb by registering(Copy::class) {
-    //     group = "build"
-    //     description = "Assemble the web application"
-    //     includeEmptyDirs = false
-    //     from(unpackKotlinJsStdlib)
-    //     from(sourceSets.main.get().output) {
-    //         exclude("**/*.kjsm")
-    //     }
-    //     into("$buildDir/web")
-    // }
-    // assemble {
-    //     dependsOn(assembleWeb)
-    // }
+    
 }
+//./gradlew wrapper --gradle-version 5.2 --distribution-type all
