@@ -10,6 +10,5 @@ Gradle build utilizes uglifyjs. uglifyjs must be installed on the system.
 
 To build the project, simply run ./gradlew.
 
-Live Demo
 
-ko4js: https://cloud.ibinti.com/file/ko4js/ko4js.html
+https://ibinti.com/kotlin-for-javascript
