@@ -27,13 +27,21 @@ tasks {
         /*
         uglifyjs is installed on the system with npm 
         */
-        commandLine("uglifyjs", "build/kotlin-js-min/main/kotlin.js", "build/kotlin-js-min/main/ko4js.js", "-c","-m", "-o", "build/kotlin-js-min/main/ko4js.min.js")
-                                      
+        commandLine("uglifyjs", 
+        "build/kotlin-js-min/main/kotlin.js", 
+        "build/kotlin-js-min/main/ko4js.js", 
+        "-c","-m", "-o", "js/ko4js.min.js")
+        doLast { 
+            copy {
+                from("js/ko4js.min.js")
+                into("../yogen/Web/web_upload/file/js")
+            }
+        }                            
     }
     
     compileKotlin2Js {
         kotlinOptions {
-            outputFile = "${sourceSets.main.get().output.resourcesDir}/ko4js.js"
+            outputFile = "${projectDir}/js/ko4js.js"
             moduleKind = "plain"
             sourceMap = false
             sourceMapEmbedSources = "never"
