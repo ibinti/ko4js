@@ -1,8 +1,7 @@
 .idea
 .gradle
-/build/
-/js/
-/min/
+build
+js
 *.iml
 .DS_Store
 local.properties

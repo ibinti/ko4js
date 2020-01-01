@@ -1,10 +1,12 @@
 # This is ko4js
 Kotlin for JavaScript
 
-This sample project shows how to use Kotlin DCE and uglifyjs to get a small bundle.
+The sample projects show how to do Kotlin DCE and uglifyjs to get a complete js file.
 
-Gradle utilizes uglifyjs. uglifyjs must be installed on the system. 
+uglifyjs must be installed on the system for those projects that use it. 
 
-To build the project, simply run ./gradlew, and then js files will be created in js directory.
+This repo consists of sub directories. Each directory is a complete project. 
+To build a project, open the terminal and cd to the directory of your interest.
+Run ./gradlew, and then open html file to see the action in the browser.
 
 https://ibinti.com/kotlin-for-javascript

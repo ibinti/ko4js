@@ -19,25 +19,11 @@ defaultTasks("uglifyjs")
 tasks {
     
     runDceKotlinJs {
-        //If the function has parameters, its name will be mangled,
-        // so the mangled name should be used in the keep directive. 
-        // However if @JsName is used for the function name, 
-        // use JsName instead so that no mangled name is necessary.
-        keep("ko4js.okoko.fn")
-    }
-
-    register("dce") {
-        dependsOn(runDceKotlinJs)
-        doLast {
-            copy {
-                from("build/kotlin-js-min/main/ko4js.js")
-                into("js/dce")
-            }
-        }
+        keep("ko4js.fn")
     }
 
     register<Exec>("uglifyjs") {
-        dependsOn("dce")
+        dependsOn(runDceKotlinJs)
         /*
         uglifyjs is installed on the system with node 
         or
@@ -50,14 +36,13 @@ tasks {
         */
         commandLine("uglifyjs", 
         "build/kotlin-js-min/main/kotlin.js", 
-        "build/kotlin-js-min/main/kotlinx-coroutines-core.js",
-        "js/dce/ko4js.js", 
-        "-c", "-m", "-o", "js/ko4js.min.js")
+        "build/kotlin-js-min/main/ko4js.js", 
+        "-c", "-m", "-o", "ibinti.min.js")
     }
     
     compileKotlin2Js {
         kotlinOptions {
-            outputFile = "${projectDir}/js/ko4js.js"
+            outputFile = "${projectDir}/build/ko4js.js"
             moduleKind = "plain"
             sourceMap = false
             sourceMapEmbedSources = "never"
