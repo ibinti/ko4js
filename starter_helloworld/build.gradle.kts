@@ -17,14 +17,6 @@ repositories {
 defaultTasks("build")
 
 tasks {
-//    "build" {
-//        doLast {
-//            copy {
-//                from("build/kotlin-js-min/main/kotlin.js")
-//                into("${projectDir}/js")
-//            }
-//        }
-//    }
     
     compileKotlin2Js {
         kotlinOptions {
