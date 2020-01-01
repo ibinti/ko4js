@@ -3,7 +3,6 @@
 /build/
 /js/
 /min/
-/knockout.js/
 *.iml
 .DS_Store
 local.properties
@@ -18,8 +17,3 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
-/nbproject/
-Groovy_DSL/.classpath
-Groovy_DSL/.project
-Groovy_DSL/.settings/
-Groovy_DSL/bin/
