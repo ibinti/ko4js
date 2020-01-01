@@ -19,8 +19,11 @@ defaultTasks("uglifyjs")
 tasks {
     
     runDceKotlinJs {
-        //If the function has parameters, its name will be mangled, so the mangled name should be used in the keep directive. However if @JsName is used for the function name, use JsName instead so that no mangled name is necessary.
-        keep("ko4js.ibinti.fn")
+        //If the function has parameters, its name will be mangled,
+        // so the mangled name should be used in the keep directive. 
+        // However if @JsName is used for the function name, 
+        // use JsName instead so that no mangled name is necessary.
+        keep("ko4js.okoko.fn")
     }
 
     register("dce") {

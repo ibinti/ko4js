@@ -23,6 +23,14 @@ you should not see this after DCE
     println("I see you!")
 }
 
+@JsName("fn") 
+fun you_will_see_me_after_dec() {
+/*
+you should see this after DCE
+ */
+    println("I see you!")
+}
+
 fun kumbaya() {
     document.addEventListener("DOMContentLoaded", {
         kquery("#kotlin").onclick = { evt:dynamic ->
