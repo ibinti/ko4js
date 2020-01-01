@@ -1,7 +1,12 @@
 package okoko
-import kotlin.browser.document
-import kotlin.browser.window
+val document:dynamic = kotlin.browser.document
+val kquery:dynamic = document.querySelector.bind(document)
 external val jQuery:dynamic = definedExternally
+
+fun main() {
+    log()
+    kumbaya()
+}
 
 fun log() {
     println("this is the log!")
@@ -18,17 +23,12 @@ you should not see this after DCE
     println("I see you!")
 }
 
-fun boombaya() {
-    jQuery(document).ready({
-        jQuery("p").click( {
-            jtext("p","Thank You, Sir!")
+fun kumbaya() {
+    document.addEventListener("DOMContentLoaded", {
+        kquery("#kotlin").onclick = { evt:dynamic ->
+            evt.currentTarget.innerText = "This is from Kotlin/JS!"
             log()
-        })
-        jtext("p","If you click on me, you will be mesmerized.")
+        }
+        Unit
     })
-}
-
-fun main(args: Array<String>) {
-    log()
-    boombaya()
 }

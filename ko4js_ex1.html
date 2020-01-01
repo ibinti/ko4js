@@ -5,8 +5,8 @@
 <script src="js/ko4js.min.js"></script>
 <script>
 $(document).ready(function(){
-  $("p").click(function(){
-    $(this).text("Bless You!");
+  $("#jquery").click(function(){
+    $(this).text("This is from jQuery!");
     ko4js.okoko.log()
   });
 });
@@ -14,7 +14,8 @@ $(document).ready(function(){
 </head>
 <body>
 
-<p>If you click on me, You will be blessed.</p>
+<p id="jquery">this is a jquery click example</p>
+<p id="kotlin">this is kotlin/js click example</p>
 
 </body>
 </html>
