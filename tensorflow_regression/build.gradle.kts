@@ -9,7 +9,6 @@ sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourc
 
 dependencies {
     implementation(kotlin("stdlib-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.2")
 }
 
 repositories {
@@ -27,7 +26,6 @@ tasks {
         */
         commandLine("uglifyjs", 
         "build/kotlin-js-min/main/kotlin.js",
-        "build/kotlin-js-min/main/kotlinx-coroutines-core.js",
         "build/kotlin-js-min/main/app.js", 
         "-c", "-m", "-o", "script.js") 
     }
@@ -41,5 +39,3 @@ tasks {
         }
     }
 }
-
-//./gradlew wrapper --gradle-version 6.0.1 --distribution-type all
