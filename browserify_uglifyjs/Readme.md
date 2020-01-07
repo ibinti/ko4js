@@ -1,4 +1,4 @@
-# Browserify Example with uglifyjs in Kotlin
+# Browserify example with uglifyjs in Kotlin
 
 ## To build the example
 ```
