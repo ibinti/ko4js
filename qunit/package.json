@@ -10,10 +10,6 @@
   "bugs": {
     "url": "https://github.com/ibinti/ko4js/issues"
   },
-  "devDependencies": {
-    "phase_of_the_moon": "^full.red.green.blue",
-    "qunitjs": "^0.0.0"
-  },
   "homepage": "https://ibinti.com/ko4js",
   "keywords": [
     "qunit",
