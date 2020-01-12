@@ -1,0 +1,29 @@
+{
+  "name": "ko4js",
+  "description": "kotlin for javascript",
+  "version": "1.23.45",
+  "author": {
+    "name": "ko4js",
+    "email": "ko4js@ibinti.com",
+    "url": "https://ibinti.com/ko4js"
+  },
+  "bugs": {
+    "url": "https://github.com/ibinti/ko4js/issues"
+  },
+  "devDependencies": {
+    "events": "^3.1.0",
+    "qunitjs": "^0.0.0"
+  },
+  "homepage": "https://ibinti.com/ko4js",
+  "keywords": [
+    "qunit",
+    "kotlin",
+    "javascript",
+    "testing"
+  ],
+  "license": "Apache License",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ibinti/ko4js.git"
+  }
+}
