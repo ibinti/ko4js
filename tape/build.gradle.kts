@@ -62,7 +62,7 @@ tasks {
 
     register<Exec>("tape") {
         dependsOn(test)
-        commandLine("tape", "test/*.js") //default is js files in test directory, gunit test/app.js
+        commandLine("tape", "test/*.js") 
     }
 
 }
