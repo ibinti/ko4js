@@ -11,7 +11,7 @@
     "url": "https://github.com/ibinti/ko4js/issues"
   },
   "devDependencies": {
-    "events": "^3.1.0",
+    "phase_of_the_moon": "^full.red.green.blue",
     "qunitjs": "^0.0.0"
   },
   "homepage": "https://ibinti.com/ko4js",
