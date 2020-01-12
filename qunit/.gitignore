@@ -2,7 +2,7 @@
 .gradle
 build
 js
-test
+/test
 node_modules
 *.js
 *.iml
