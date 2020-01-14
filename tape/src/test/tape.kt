@@ -124,4 +124,18 @@ fun main() {
         t.equal(test, label)
         t.end()
     })
+    
+    test("when_num_2", { t ->
+        val num:dynamic = 2
+        val torrent_numPeers = "$num".toDouble().toInt()
+        val peer_peers = when(torrent_numPeers){
+            0 -> "peer"
+            1 -> "peer"
+            else -> "peers"
+        }
+        val label = "peers"
+        t.equal(peer_peers, label)
+        t.end()
+    })
+    
 }
