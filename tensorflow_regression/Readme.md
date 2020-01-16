@@ -13,4 +13,4 @@
 
 ## To see the action
 
-Open regression.html with a browser
+Open example.html with a browser
