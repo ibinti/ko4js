@@ -7,4 +7,4 @@
 will generate bundle.min.js
 
 ## To run the example 
-Open browserify_uglifyjs.html with a browser
+Open example.html with a browser
