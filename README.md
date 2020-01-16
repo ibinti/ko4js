@@ -13,4 +13,4 @@ This repo consists of sub directories. Each directory is a complete standalone p
 Project build is done with Gradle Kotlin DSL. To build a browser project, open the terminal and cd to the directory of your interest. Run <code>./gradlew</code>, and then open html file to see the action in the browser. Note that JDK8 is required for the Gradle. We use <code>./gradlew</code> so that Gradle installation in the system level is not required.
 
 
-<a href="https://ibinti.com/kotlin-for-javascript" target="_blank">https://ibinti.com/kotlin-for-javascript</a>
+<a href="https://ibinti.com/ko4js" target="_blank">https://ibinti.com/ko4js</a>
