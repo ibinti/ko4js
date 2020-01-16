@@ -11,13 +11,19 @@ val printjo = { jo:dynamic ->
 external val dragDrop:dynamic = definedExternally
 
 fun main() {
+
      window.addEventListener("load", {
-        document.querySelector("#res").textContent = "Drag and Drop Files"
+        
+        document.querySelector("#res").innerText = "Drag and Drop Files"
         dragDrop("#dropTarget", { files ->
+            
             val msg = printjo(files)
             document.querySelector("#dropTarget").innerText = "${msg}"
+            
             Unit
         })
+        
         Unit
     })
+    
 }
