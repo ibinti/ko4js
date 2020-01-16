@@ -2,7 +2,7 @@
 
 ## Kotlin for JavaScript
 
-The sample projects show how to code in Kotlin to generate a complete js file that works in the browser and nodejs.
+The projects show how to code in Kotlin to generate a complete js file that works in the browser and nodejs.
 
 For those projects that use npm modules and targeting nodejs, obviously working node and npm are required.
 
