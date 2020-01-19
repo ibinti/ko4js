@@ -12,6 +12,8 @@ fun main() {
     
 }
 
+val array_from = { x:dynamic -> js("""Array.from(x)""") }
+
 val kob = {
   val o:dynamic=object{}
   o
@@ -174,8 +176,8 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
     val xs = xs_preds.first
     val preds = xs_preds.second
     
-    val array_xs = js("""Array.from(xs)""")
-    val array_preds = js("""Array.from(preds)""")
+    val array_xs = array_from(xs)
+    val array_preds = array_from(preds)
     
     var index = 0
     val predictedPoints = array_xs.map { value ->
