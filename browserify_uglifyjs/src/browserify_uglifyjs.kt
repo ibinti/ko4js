@@ -14,8 +14,8 @@ fun main() {
     val vm = require("vm")
  
     window.addEventListener("load", {
-        val res = vm.runInNewContext("a + 32", js("{ a : 32 }"))
-        document.querySelector("#res").textContent = "$res-bit process" 
+        val res = vm.runInNewContext("a * 8", object{val a = 8 })
+        document.querySelector("#res").textContent = "$res-bit processor" 
         Unit
     })
 
