@@ -22,7 +22,7 @@ fun main() {
     val vm = require("vm")
  
     window.addEventListener("load", {
-        val res = vm.runInNewContext("a + 5", js("{ a : 100 }"))
+        val res = vm.runInNewContext("a + 8", object{ val a = 111 })
         document.querySelector("#res").textContent = res
         Unit
     })
