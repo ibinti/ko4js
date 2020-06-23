@@ -18,6 +18,7 @@ GlobalScope.async { }
 GlobalScope.launch { }
 */
 external val require:dynamic = definedExternally
+external val Date:dynamic = definedExternally
 
 fun main() {
     
@@ -54,18 +55,22 @@ val express_server = {
             suspend fun x_something_deep(): Int {
                 // ... some long running operation here
                 // this synchronously waits for x_something_deep() to finish
+                kotlinx.coroutines.delay(5000)
                 return 5000
             }
             suspend fun y_something_deep(): Int {
                 // ... some long running operation here
                 // this synchronously waits for y_something_deep() to finish
+                kotlinx.coroutines.delay(6000)
                 return 6000
             }
             val x =  GlobalScope.async { x_something_deep() }
             val y =  GlobalScope.async { y_something_deep() }
         
+            jo.before = Date()
             jo.x = x.await()
             jo.y = y.await()
+            jo.after = Date()
             res.send(jo)
             printjo(jo)
     } })
