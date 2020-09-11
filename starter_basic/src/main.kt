@@ -1,6 +1,5 @@
 val document:dynamic = kotlin.browser.document
 val kquery:dynamic = document.querySelector.bind(document)
-external val jQuery:dynamic = definedExternally
 
 fun main() {
     document.addEventListener("DOMContentLoaded", {
