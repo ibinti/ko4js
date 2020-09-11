@@ -137,5 +137,13 @@ fun main() {
         t.equal(peer_peers, label)
         t.end()
     })
+    //
+    test("zero_pad", { t ->
+        val num:dynamic = 210
+        val test_togo = zero_pad(num, 8)
+        val label = "210"
+        t.equal(test_togo, label)
+        t.end()
+    })
     
 }
