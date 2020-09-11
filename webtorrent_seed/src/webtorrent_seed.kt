@@ -1,5 +1,6 @@
 external val document:dynamic = definedExternally
 external val window:dynamic = definedExternally
+external val JSON:dynamic = definedExternally
 
 fun new(type: dynamic, vararg args: dynamic): dynamic {
     val argsArray = (listOf(null) + args).toTypedArray()
@@ -7,7 +8,7 @@ fun new(type: dynamic, vararg args: dynamic): dynamic {
 }
 
 val printjo = { jo:dynamic -> 
-    val msg = kotlin.js.JSON.stringify(jo)
+    val msg = JSON.stringify(jo)
     println(msg)
     msg
 }
