@@ -13,10 +13,6 @@ npm install -g node-fetch
 
 */
 import kotlinx.coroutines.*
-/* import kotlinx.coroutines.* for
-GlobalScope.async { }
-GlobalScope.launch { }
-*/
 external val require:dynamic = definedExternally
 external val Date:dynamic = definedExternally
 external val JSON:dynamic = definedExternally
@@ -33,7 +29,6 @@ fun main() {
 helper
  */
 fun printjo(jo:dynamic){val msg = JSON.stringify(jo);println(msg)}
-val kob:dynamic = {object{}}
 
 val express_server = {
     
@@ -43,20 +38,20 @@ val express_server = {
     val app = express()
     val port = 8055
     
-    app.get("/",  {req, res -> GlobalScope.launch{
-            val jo = kob()
+    app.get("/",  {req, res -> GlobalScope.async{
+            val jo:dynamic = object{}
             jo.hello="hello kotlin world!"
 
             suspend fun x_something_deep(): Int {
                 // ... some long running operation here
                 // this synchronously waits for x_something_deep() to finish
-                kotlinx.coroutines.delay(5000)
+                delay(5000)
                 return 5000
             }
             suspend fun y_something_deep(): Int {
                 // ... some long running operation here
                 // this synchronously waits for y_something_deep() to finish
-                kotlinx.coroutines.delay(6000)
+                delay(6000)
                 return 6000
             }
             val x =  GlobalScope.async { x_something_deep() }
@@ -75,7 +70,7 @@ val express_server = {
         printjo(req.params)       
     })
    
-    app.get("/fetch", {req, res -> GlobalScope.launch { 
+    app.get("/fetch", {req, res -> GlobalScope.async { 
         fetch("https://github.com/ibinti/ko4js")
         .then({response->
             response.text()
