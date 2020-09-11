@@ -19,6 +19,7 @@ GlobalScope.launch { }
 */
 external val require:dynamic = definedExternally
 external val Date:dynamic = definedExternally
+external val JSON:dynamic = definedExternally
 
 fun main() {
     
@@ -31,14 +32,8 @@ fun main() {
 /*
 helper
  */
-fun printjo(jo:dynamic){val msg = kotlin.js.JSON.stringify(jo);println(msg)}
-val kob = {
-/*
-just to wrap a dynamic object
-*/
-  val o:dynamic=object{}
-  o
-} 
+fun printjo(jo:dynamic){val msg = JSON.stringify(jo);println(msg)}
+val kob:dynamic = {object{}}
 
 val express_server = {
     
