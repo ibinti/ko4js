@@ -8,7 +8,8 @@ val printjo = { jo:dynamic ->
     msg
 }
 
-@JsModule("drag-drop") //for npm install drag-drop
+@JsModule("drag-drop")
+@JsNonModule
 external val dragDrop:dynamic = definedExternally
 
 fun main() {
