@@ -3,7 +3,7 @@ val kquery:dynamic = document.querySelector.bind(document)
 
 fun main() {
     document.addEventListener("DOMContentLoaded", {
-        val msg = "This is basic example from Kotlin/JS!"
+        val msg = "this is basic example of kotlin.js"
         val basic:dynamic = kquery("#basic")
         basic.is_toggle = false
         basic.onclick = {
