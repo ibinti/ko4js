@@ -4,7 +4,7 @@
 ```
 ./gradlew 
 ```
-will generate bundle.js
+will generate ibinti.js
 
 ## To run the example 
 open example.html with a browser
