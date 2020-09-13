@@ -30,7 +30,7 @@ tasks{
         doLast {
             copy {
                 from("build/distributions/${project.name}.js")
-                into("${projectDir}/js")
+                into("${projectDir}")
                 rename("${project.name}.js", "ibinti.js")
             }
         }
