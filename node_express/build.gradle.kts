@@ -1,42 +1,48 @@
-plugins {
-    id("kotlin2js") version "1.3.61"
-    id("kotlin-dce-js") version "1.3.61"
+val kotlin_version: String by extra
+
+buildscript {
+    var kotlin_version: String by extra
+    kotlin_version = "1.4.10"
 }
 
-sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {    
-    kotlin.srcDir("src")
+plugins {
+    val kotlin_version: String by extra
+    kotlin("js") version kotlin_version
 }
 
 dependencies {
     implementation(kotlin("stdlib-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.9")
 }
 
 repositories {
     jcenter()
 }
 
-defaultTasks("uglifyjs")
+defaultTasks("ibinti")
 
-tasks {
-
-    register<Exec>("uglifyjs") {
-        dependsOn(runDceKotlinJs)
-        /*
-        uglifyjs is installed on the system with apt install uglifyjs 
-        */
-        commandLine("uglifyjs", 
-        "build/kotlin-js-min/main/app.js", 
-        "-c", "-m", "-o", "js/app.js")
-    }
-    
-    compileKotlin2Js {
-        kotlinOptions {
-            outputFile = "${projectDir}/js/app.js"
-            moduleKind = "commonjs"
-            sourceMap = false
-            sourceMapEmbedSources = "never"
-            metaInfo = false
+tasks{
+    register("ibinti") {
+        dependsOn("build")
+        doLast {
+            copy {
+                from("build/js/packages/${name}/kotlin/${name}.js")
+                into("${projectDir}")
+            }
         }
     }
 }
+
+kotlin {
+    sourceSets["main"].apply {    
+        kotlin.srcDir("src") 
+    }
+    js {
+        moduleName = "ibinti" //this does not affect distribution module name yet!
+        nodejs {
+            
+        }
+        binaries.executable()
+    }
+}
+//./gradlew wrapper --gradle-version=6.6.1 --distribution-type=all
