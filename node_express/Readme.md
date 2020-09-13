@@ -7,5 +7,5 @@
 
 ## To run the app with nodejs
 ```
-node js/app.js
+node ibinti.js
 ```
