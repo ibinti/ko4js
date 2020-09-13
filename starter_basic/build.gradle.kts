@@ -6,7 +6,8 @@ buildscript {
 }
 
 plugins {
-    kotlin("js") version "1.4.10"
+    val kotlin_version: String by extra
+    kotlin("js") version kotlin_version
 }
 
 dependencies {
@@ -21,6 +22,9 @@ defaultTasks("browserProductionWebpack")
 
 kotlin {
     js {
+        sourceSets["main"].apply {    
+            kotlin.srcDir("src") 
+        }
         browser {
             distribution {
                 directory = File("${projectDir}/js")
