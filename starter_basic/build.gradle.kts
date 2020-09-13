@@ -42,9 +42,12 @@ kotlin {
         kotlin.srcDir("src") 
     }
     js {
-        moduleName = "ibinti" //this does not affect distribution module name yet! it only affect build.packages.moduleName, but who cares about temporary build name that automatically re-builds every time?
+        moduleName = "ibinti" //this does not affect distribution module name yet!
         
         browser {
+            dceTask {
+                keep("${moduleName}.fn" )
+            }
             webpackTask {
             /* 
              output.filename = "ibinti.js"
