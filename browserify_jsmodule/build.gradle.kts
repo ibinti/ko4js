@@ -1,10 +1,13 @@
-plugins {
-    id("kotlin2js") version "1.3.61"
-    id("kotlin-dce-js") version "1.3.61"
+val kotlin_version: String by extra
+
+buildscript {
+    var kotlin_version: String by extra
+    kotlin_version = "1.4.10"
 }
 
-sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {    
-    kotlin.srcDir("src")
+plugins {
+    val kotlin_version: String by extra
+    kotlin("js") version kotlin_version
 }
 
 dependencies {
@@ -15,27 +18,50 @@ repositories {
     jcenter()
 }
 
-defaultTasks("browserify")
+defaultTasks("ibinti")
 
-tasks {
-
-    register<Exec>("browserify") {
-        dependsOn(runDceKotlinJs)
+tasks{
+    register("ibinti") {
+        dependsOn("browserProductionWebpack")
         /*
-        browserify is installed on the system with npm install -g browserify 
-        */
-        commandLine("browserify", 
-        "build/kotlin-js-min/main/app.js", 
-        "-o", "bundle.js")
-    }
-    
-    compileKotlin2Js {
-        kotlinOptions {
-            outputFile = "${projectDir}/js/app.js"
-            moduleKind = "commonjs"
-            sourceMap = false
-            sourceMapEmbedSources = "never"
-            metaInfo = false
+        * this is until the kotlin("js") does honestly what it claims
+        * moduleName and output.filename are useless at the moment
+        * */
+        doLast {
+            copy {
+                from("build/distributions/${project.name}.js")
+                into("${projectDir}")
+                rename("${project.name}.js", "ibinti.js")
+            }
         }
     }
 }
+
+kotlin {
+    sourceSets["main"].apply {    
+        kotlin.srcDir("src") 
+    }
+    js {
+        moduleName = "ibinti" //this does not affect distribution module name yet!
+        
+        browser {
+            dceTask {
+                keep("${moduleName}.fn" )
+            }
+            webpackTask {
+            /* 
+             output.filename = "ibinti.js"
+                    ^ Unresolved reference: filename
+             it should but it does not as of 1.4.10
+             as a workarounf for now, use "basic" task doLast{}
+            */
+               //output.filename = "ibinti.js"
+            }
+//            distribution {
+//                directory = File("${projectDir}/js")
+//            }
+        }
+        binaries.executable()
+    }
+}
+//./gradlew wrapper --gradle-version=6.6.1 --distribution-type=all
