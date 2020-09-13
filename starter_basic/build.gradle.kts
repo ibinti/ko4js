@@ -33,3 +33,4 @@ kotlin {
         binaries.executable()
     }
 }
+//./gradlew wrapper --gradle-version=6.6.1 --distribution-type=all
