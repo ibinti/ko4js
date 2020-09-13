@@ -18,10 +18,10 @@ repositories {
     jcenter()
 }
 
-defaultTasks("basic")
+defaultTasks("ibinti")
 
 tasks{
-    register("basic") {
+    register("ibinti") {
         dependsOn("browserProductionWebpack")
         /*
         * this is until the kotlin("js") does honestly what it claims
@@ -29,9 +29,9 @@ tasks{
         * */
         doLast {
             copy {
-                from("build/distributions/starter_basic.js")
+                from("build/distributions/${project.name}.js")
                 into("${projectDir}/js")
-                rename("starter_basic.js", "ibinti.js")
+                rename("${project.name}.js", "ibinti.js")
             }
         }
     }
