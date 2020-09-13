@@ -71,4 +71,4 @@ tasks {
 
 }
 
-//./gradlew wrapper --gradle-version=6.0.1 --distribution-type=all
+//./gradlew wrapper --gradle-version=6.6.1 --distribution-type=all
