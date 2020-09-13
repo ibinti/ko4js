@@ -13,13 +13,9 @@ fun main() {
     
 }
 
-val kob:dynamic = {object{}} 
-
 val points = {x:Float, y:Float ->
-    object{ 
-        val x = x
-        val y = y
-    }
+    val o:dynamic=object{};o.x=x;o.y=y
+    o
 }
 
 val run = {
