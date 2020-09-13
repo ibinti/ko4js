@@ -1,10 +1,12 @@
-plugins {
-    id("kotlin2js") version "1.3.61"
-    id("kotlin-dce-js") version "1.3.61"
+val kotlin_version: String by extra
+
+buildscript {
+    var kotlin_version: String by extra
+    kotlin_version = "1.4.10"
 }
 
-sourceSets["main"].withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {    
-    kotlin.srcDir("src")
+plugins {
+    kotlin("js") version "1.4.10"
 }
 
 dependencies {
@@ -15,34 +17,15 @@ repositories {
     jcenter()
 }
 
-defaultTasks("basic")
+defaultTasks("browserProductionWebpack")
 
-tasks {
-    
-    register("basic") {
-        dependsOn(runDceKotlinJs)
-        doLast {
-            copy {
-                from("build/kotlin-js-min/main/basic.js")
-                into("${projectDir}/js")
+kotlin {
+    js {
+        browser {
+            distribution {
+                directory = File("${projectDir}/js")
             }
-            copy {
-                from("build/kotlin-js-min/main/kotlin.js")
-                into("${projectDir}/js")
-            }
-            
         }
+        binaries.executable()
     }
-
-    compileKotlin2Js {
-        kotlinOptions {
-            outputFile = "${projectDir}/js/basic.js"
-            moduleKind = "plain"
-            sourceMap = false
-            sourceMapEmbedSources = "never"
-            metaInfo = false
-        }
-    }
-    
 }
-//./gradlew wrapper --gradle-version 6.0.1 --distribution-type all
