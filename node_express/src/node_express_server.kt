@@ -1,17 +1,3 @@
-/*
-apt install nodejs
-
-node will use NODE_PATH to locate the global node_modules
-export NODE_PATH=$(npm root --quiet -g)
-in bash_profile, or .bashrc, or .profile etc whaterver your os needs
-
-
-npm install -g kotlin
-npm install -g kotlinx-coroutines-core
-npm install -g express 
-npm install -g node-fetch
-
-*/
 import kotlinx.coroutines.*
 external val require:dynamic = definedExternally
 external val Date:dynamic = definedExternally
