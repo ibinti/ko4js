@@ -27,7 +27,7 @@ val express_server = {
     
     app.get("/",  {req, res -> GlobalScope.async{
             val jo:dynamic = object{}
-            jo.hello="hello kotlin world!"
+            jo.hello="welcome to ibinti world!"
 
             suspend fun x_something_deep(): Int {
                 // ... some long running operation here
@@ -48,6 +48,7 @@ val express_server = {
             jo.x = x.await()
             jo.y = y.await()
             jo.after = Date()
+            jo.message = "this will be shown on the browser after 6 seconds, not 11 seconds. can you tell the difference?"
             res.send(jo)
             printjo(jo)
     } })
