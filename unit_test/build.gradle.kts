@@ -22,20 +22,24 @@ repositories {
 defaultTasks("browserTest")
 
 kotlin {
+    
     sourceSets["main"].apply {    
         kotlin.srcDir("src/main") 
     }
+    
     sourceSets["test"].apply {    
         kotlin.srcDir("src/main")
         kotlin.srcDir("src/test") 
     }
     
-    target {
+    js {
         browser {
             testTask {
                 useKarma {
                     useChromeHeadless()
+                    //useSafari()
                     //useFirefox()
+                    useChrome()
                 }
             }
         }
