@@ -57,12 +57,70 @@ class SimpleTest {
         
     }
 
-    @Test fun test_package_version() {
+    @Test fun test_package_version_5() {
+        
+        val label_version = "0123"
+        
+        val version = require("../../../../../package.json").version
+        val test_version = version_azureus(version)
+        
+        assertEquals(test_version, label_version)
+        
+    }
+    
+    @Test fun test_package_version_4() {
+        
+        val label_version = "0123"
+        
+        val version = require("../../../../package.json").version
+        val test_version = version_azureus(version)
+        
+        assertEquals(test_version, label_version)
+        
+    }
+    
+    @Test fun test_package_version_3() {
+        
+        val label_version = "0123"
+        
+        val version = require("../../../package.json").version
+        val test_version = version_azureus(version)
+        
+        assertEquals(test_version, label_version)
+        
+    }
+    
+    @Test fun test_package_version_2() {
+        
+        val label_version = "0123"
+        
+        val version = require("../../package.json").version
+        val test_version = version_azureus(version)
+        
+        assertEquals(test_version, label_version)
+        
+    }
+    
+    @Test fun test_package_version_1() {
+        
+        val label_version = "0123"
         
         val version = require("../package.json").version
         val test_version = version_azureus(version)
-        val label_version = "0123"
+        
         assertEquals(test_version, label_version)
+        
+    }
+    
+    @Test fun test_package_version_0() {
+        
+        val label_version = "0123"
+        
+        val version = require("package.json").version
+        val test_version = version_azureus(version)
+        
+        assertEquals(test_version, label_version)
+        
     }
     
 }
