@@ -1,4 +1,5 @@
 import kotlinx.coroutines.*
+import kotlin.js.Promise
 external val require:dynamic = definedExternally
 external val Date:dynamic = definedExternally
 external val JSON:dynamic = definedExternally
@@ -57,7 +58,7 @@ val express_server = {
     })
    
     app.get("/fetch", {req, res -> GlobalScope.async { 
-        fetch("https://github.com/ibinti/ko4js")
+        fetch("https://ibinti.com/ko4js")
         .then({response->
             response.text()
         })
@@ -65,11 +66,22 @@ val express_server = {
             res.statusCode = 200
             res.setHeader("Content-Type", "text/html") 
             res.send(body)
-            printjo(body)
         })
         .catch({err ->
             println("""err: ${err.message}""")
         })
+    }})
+    
+    app.get("/fetch2", {req, res -> GlobalScope.async { 
+        try{
+            val response = (fetch("https://ibinti.com/ko4js") as Promise<dynamic>).await()
+            val body = (response.text() as Promise<dynamic>).await()
+            res.statusCode = 200
+            res.setHeader("Content-Type", "text/html") 
+            res.send(body)
+        } catch(t:Throwable){
+            println("""err: ${t.message}""")
+        }
     }})
     
     app.listen(port, { println("express listening on port ${port}!")})
