@@ -2,7 +2,7 @@
 
 ## Kotlin for JavaScript
 
-The projects show how to code in Kotlin to generate a complete js file that works in the browser and nodejs.
+The projects show how to code in dynamic Kotlin to generate a complete js file that works in the browser and nodejs. Kotlin dynamic type is used wherever possible. Static type is discouraged and used only in those cases where the static type is needed.
 
 This repo consists of sub directories. Each directory is a complete standalone project.
  
