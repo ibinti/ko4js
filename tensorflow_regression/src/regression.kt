@@ -153,16 +153,16 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
     // that we did earlier.
     val xs_preds = tf.tidy({
     
-        val xs = tf.linspace(0, 1, 100)    
-        val preds = model.predict(xs.reshape(arrayOf(100, 1)))      
+        val xs = tf.linspace(0, 1, 100)
+        val preds = model.predict(xs.reshape(arrayOf(100, 1)))
         
         val unNormXs = xs
         .mul(inputMax.sub(inputMin))
-        .add(inputMin);
+        .add(inputMin)
         
         val unNormPreds = preds
         .mul(labelMax.sub(labelMin))
-        .add(labelMin);
+        .add(labelMin)
         
         // Un-normalize the data
         Pair(unNormXs.dataSync(), unNormPreds.dataSync())
@@ -174,17 +174,9 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
     val array_xs = Array.from(xs)
     val array_preds = Array.from(preds)
     
-    var index = 0
-    val predictedPoints = array_xs.map { value ->
-        points(value,array_preds[index++])
+    val predictedPoints = array_xs.map { value, index ->
+        points(value,array_preds[index])
     }
-    /* mapIndexed is not working against its behaviour 
-    * TypeError: l.mapIndexed is not a function
-    * it is supposed to be:
-        array_xs.mapIndexed { index, value ->
-            points(value,array_preds[index])
-        }
-    */
     
     val originalPoints = inputData.map{ d -> 
         points(d.horsepower,d.mpg)
