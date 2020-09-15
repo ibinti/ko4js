@@ -1,3 +1,5 @@
+import kotlin.js.Promise
+import kotlinx.coroutines.*
 external val document:dynamic = definedExternally
 external val tf:dynamic = definedExternally
 external val tfvis:dynamic = definedExternally
@@ -8,7 +10,7 @@ fun main() {
     
     document.addEventListener("DOMContentLoaded", {
         val msg = "welcome to kotlin tensorflow.js!"
-        run()
+        GlobalScope.async{run()}
         println(msg)
     })
     
@@ -16,29 +18,20 @@ fun main() {
 
 fun points(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
 
-val run = {
-
-    fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json")
-    .then({carsDataReq->
-        carsDataReq.json()
-    })
-    .then({carsData->
-        carsData.map{car -> object{
-            val mpg= car.Miles_per_Gallon
-            val horsepower= car.Horsepower
-        }}
-        .filter{car -> car.mpg != null && car.horsepower != null}
-    })
-    .then({data->
+suspend fun run(){
+    try{
+        val carsDataReq = (fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json") as Promise<dynamic>).await()
+        val carsData = (carsDataReq.json() as Promise<dynamic>).await()
+        
+        val data = carsData.map{car -> object{val mpg= car.Miles_per_Gallon;val horsepower= car.Horsepower}}.filter{car -> car.mpg != null && car.horsepower != null}
+        
         val surface = tfvis.visor().surface(object{val name= "Horsepower vs MPG";val tab= "Charts"})
-        val originalPoints = data.map{ d -> 
-            points(d.horsepower,d.mpg)
-        }
+        val originalPoints = data.map{ d -> points(d.horsepower,d.mpg) }
         tfvis.render.scatterplot(surface, object{val values= originalPoints}, 
         object{
-          val xLabel= "Horsepower"
-          val yLabel= "MPG"
-          val height= 300
+            val xLabel= "Horsepower"
+            val yLabel= "MPG"
+            val height= 300
         })
         
         // Create the model
@@ -48,21 +41,16 @@ val run = {
         val tensorData = convertToTensor(data)
         
         // Train the model  
-        trainModel(model, tensorData)
-        .then({
-            println("Done Training")
-        
-            // Make some predictions using the model and compare them to the
-            // original data
-            testModel(model, data, tensorData)
+        (trainModel(model, tensorData) as Promise<dynamic>).await()
+        println("Done Training")
     
-        })
-        
-    })
-    .catch({err ->
+        // Make some predictions using the model and compare them to the
+        // original data
+        testModel(model, data, tensorData)
+    
+    } catch(err:Throwable){
         println("""err: ${err.message}""")
-    })
-
+    }
 }
 
 val createModel = {
