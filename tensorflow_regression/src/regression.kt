@@ -14,10 +14,7 @@ fun main() {
     
 }
 
-val points = {x:Float, y:Float ->
-    val o:dynamic=object{};o.x=x;o.y=y
-    o
-}
+fun points(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
 
 val run = {
 
@@ -126,18 +123,16 @@ val trainModel = {model:dynamic, tensorData:dynamic ->
 
     // Prepare the model for training.  
     model.compile(object{
-    val optimizer= tf.train.adam()
-    val loss= tf.losses.meanSquaredError
-    val metrics= arrayOf("mse")
+        val optimizer = tf.train.adam()
+        val loss = tf.losses.meanSquaredError
+        val metrics = arrayOf("mse")
     })
     
     model.fit(tensorData.inputs, tensorData.labels, object{
-    val batchSize= 32
-    val epochs= 50
-    val shuffle= true
-    val callbacks= tfvis.show.fitCallbacks(object{val name= "Training Performance"},
-          arrayOf("loss", "mse"), 
-          object{val height= 200;val callbacks= arrayOf("onEpochEnd") })
+        val batchSize = 32
+        val epochs = 100
+        val shuffle = true
+        val callbacks = tfvis.show.fitCallbacks(object{val name= "Training Performance"},arrayOf("loss", "mse"),object{val height= 200;val callbacks= arrayOf("onEpochEnd")})
     })
 }
 
