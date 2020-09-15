@@ -1,6 +1,6 @@
-# TensorFlow.js Kotlin Example
+# TensorFlow.js dynamic kotlin example
 
-## This is a Kotlin example of TensorFlow.js tutorials in
+## This is a dynamic Kotlin example of TensorFlow.js tutorials in
 
 <a href="https://codelabs.developers.google.com/codelabs/tfjs-training-regression" target="_blank">official tensorflow.js tutorial tfjs-training-regression</a>
 
