@@ -53,7 +53,7 @@ val createModel = {
     val model = tf.sequential() 
     
     // Add a single hidden layer
-    model.add(tf.layers.dense(object{val inputShape=arrayOf(1);val units=1;val useBias=true}))
+    model.add(tf.layers.dense(object{val inputShape=Array.of(1);val units=1;val useBias=true}))
     
     // Add an output layer
     model.add(tf.layers.dense(object{val units=1;val useBias=true}))
@@ -78,8 +78,8 @@ val convertToTensor = { data:dynamic ->
         val inputs = data.map{d -> d.horsepower}
         val labels = data.map{d -> d.mpg}
         
-        val inputTensor = tf.tensor2d(inputs, arrayOf(inputs.length, 1))
-        val labelTensor = tf.tensor2d(labels, arrayOf(labels.length, 1))
+        val inputTensor = tf.tensor2d(inputs, Array.of(inputs.length, 1))
+        val labelTensor = tf.tensor2d(labels, Array.of(labels.length, 1))
         
         //Step 3. Normalize the data to the range 0 - 1 using min-max scaling
         val inputMax = inputTensor.max()
@@ -108,14 +108,14 @@ val trainModel = {model:dynamic, tensorData:dynamic ->
     model.compile(object{
         val optimizer = tf.train.adam()
         val loss = tf.losses.meanSquaredError
-        val metrics = arrayOf("mse")
+        val metrics = Array.of("mse")
     })
     
     model.fit(tensorData.inputs, tensorData.labels, object{
         val batchSize = 32
         val epochs = 100
         val shuffle = true
-        val callbacks = tfvis.show.fitCallbacks(object{val name="Training Performance"},arrayOf("loss","mse"),object{val height=200;val callbacks=arrayOf("onEpochEnd")})
+        val callbacks = tfvis.show.fitCallbacks(object{val name="Training Performance"},Array.of("loss","mse"),object{val height=200;val callbacks=Array.of("onEpochEnd")})
     })
 }
 
@@ -132,7 +132,7 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
     val xs_preds = tf.tidy({
     
         val xs = tf.linspace(0, 1, 100)
-        val preds = model.predict(xs.reshape(arrayOf(100, 1)))
+        val preds = model.predict(xs.reshape(Array.of(100, 1)))
         
         val unNormXs = xs
         .mul(inputMax.sub(inputMin))
@@ -157,6 +157,6 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
         point(d.horsepower,d.mpg)
     }
     
-    tfvis.render.scatterplot(object{val name="Model Predictions vs Original Data"}, object{val values=arrayOf(originalPoints,predictedPoints);val series=arrayOf("original","predicted")}, object{val xLabel="Horsepower";val yLabel="MPG";val height=300})
+    tfvis.render.scatterplot(object{val name="Model Predictions vs Original Data"}, object{val values=Array.of(originalPoints,predictedPoints);val series=Array.of("original","predicted")}, object{val xLabel="Horsepower";val yLabel="MPG";val height=300})
     println("All done!")
 }
