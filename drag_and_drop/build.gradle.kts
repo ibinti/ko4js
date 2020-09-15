@@ -12,7 +12,7 @@ plugins {
 
 dependencies {
     implementation(kotlin("stdlib-js"))
-    implementation(npm("drag-drop","> 0.0.0"))
+    implementation(npm("drag-drop","6.0.2"))
 }
 
 repositories {
