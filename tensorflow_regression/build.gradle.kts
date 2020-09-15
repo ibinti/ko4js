@@ -30,9 +30,19 @@ tasks{
         doLast {
             copy {
                 from("build/distributions/${project.name}.js")
-                into("${projectDir}")
+                into("js_bundle")
                 rename("${project.name}.js", "ibinti.js")
             }
+        }
+        doLast { 
+            val output = File("ibinti.js").writer()
+            output.write("let ibinti={};")
+            arrayOf("tf.min.js","tfjs-vis.umd.min.js","ibinti.js").forEach {
+                val js = File("js_bundle/${it}").readText()
+                output.write(js)
+                output.write("\n")
+            }
+            output.close()
         }
     }
 }
