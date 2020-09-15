@@ -91,12 +91,12 @@ val convertToTensor = { data:dynamic ->
         val normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin))
         
         object{
-            val inputs= normalizedInputs
-            val labels= normalizedLabels
-            val inputMax= inputMax
-            val inputMin= inputMin
-            val labelMax= labelMax
-            val labelMin= labelMin
+            val inputs = normalizedInputs
+            val labels = normalizedLabels
+            val inputMax = inputMax
+            val inputMin = inputMin
+            val labelMax = labelMax
+            val labelMin = labelMin
         }
         
     })
