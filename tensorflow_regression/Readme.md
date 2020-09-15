@@ -1,6 +1,6 @@
 # TensorFlow.js Kotlin Example
 
-## This is a Kotlin port of TensorFlow.js tutorials in
+## This is a Kotlin example of TensorFlow.js tutorials in
 
 <a href="https://codelabs.developers.google.com/codelabs/tfjs-training-regression" target="_blank">official tensorflow.js tutorial tfjs-training-regression</a>
 
