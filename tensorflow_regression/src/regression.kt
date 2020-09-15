@@ -16,7 +16,7 @@ fun main() {
     
 }
 
-fun points(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
+fun point(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
 
 suspend fun run(){
     try{
@@ -26,7 +26,7 @@ suspend fun run(){
         val data = carsData.map{car -> object{val mpg= car.Miles_per_Gallon;val horsepower= car.Horsepower}}.filter{car -> car.mpg != null && car.horsepower != null}
         
         val surface = tfvis.visor().surface(object{val name= "Horsepower vs MPG";val tab= "Charts"})
-        val originalPoints = data.map{ d -> points(d.horsepower,d.mpg) }
+        val originalPoints = data.map{ d -> point(d.horsepower,d.mpg) }
         tfvis.render.scatterplot(surface, object{val values= originalPoints}, 
         object{
             val xLabel= "Horsepower"
@@ -158,11 +158,11 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
     val array_preds = Array.from(preds)
     
     val predictedPoints = array_xs.map { value, index ->
-        points(value,array_preds[index])
+        point(value,array_preds[index])
     }
     
     val originalPoints = inputData.map{ d -> 
-        points(d.horsepower,d.mpg)
+        point(d.horsepower,d.mpg)
     }
     
     tfvis.render.scatterplot(object{val name= "Model Predictions vs Original Data"}, object{val values= arrayOf(originalPoints, predictedPoints);val series= arrayOf("original", "predicted")}, object{val xLabel= "Horsepower";val yLabel= "MPG";val height= 300})
