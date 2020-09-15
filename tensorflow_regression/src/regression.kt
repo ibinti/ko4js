@@ -23,20 +23,15 @@ suspend fun run(){
         val carsDataReq = (fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json") as Promise<dynamic>).await()
         val carsData = (carsDataReq.json() as Promise<dynamic>).await()
         
-        val data = carsData.map{car -> object{val mpg= car.Miles_per_Gallon;val horsepower= car.Horsepower}}.filter{car -> car.mpg != null && car.horsepower != null}
+        val data = carsData.map{car -> object{val mpg=car.Miles_per_Gallon;val horsepower=car.Horsepower}}.filter{car -> car.mpg != null && car.horsepower != null}
         
-        val surface = tfvis.visor().surface(object{val name= "Horsepower vs MPG";val tab= "Charts"})
+        val surface = tfvis.visor().surface(object{val name="Horsepower vs MPG";val tab="Charts"})
         val originalPoints = data.map{ d -> point(d.horsepower,d.mpg) }
-        tfvis.render.scatterplot(surface, object{val values= originalPoints}, 
-        object{
-            val xLabel= "Horsepower"
-            val yLabel= "MPG"
-            val height= 300
-        })
+        tfvis.render.scatterplot(surface, object{val values=originalPoints},object{val xLabel="Horsepower";val yLabel="MPG";val height=300})
         
         // Create the model
         val model = createModel()  
-        tfvis.show.modelSummary(object{val name= "Model Summary"}, model)
+        tfvis.show.modelSummary(object{val name="Model Summary"}, model)
         
         val tensorData = convertToTensor(data)
         
@@ -58,10 +53,10 @@ val createModel = {
     val model = tf.sequential() 
     
     // Add a single hidden layer
-    model.add(tf.layers.dense(object{val inputShape= arrayOf(1);val units= 1;val useBias= true}))
+    model.add(tf.layers.dense(object{val inputShape=arrayOf(1);val units=1;val useBias=true}))
     
     // Add an output layer
-    model.add(tf.layers.dense(object{val units= 1;val useBias= true}))
+    model.add(tf.layers.dense(object{val units=1;val useBias=true}))
     
     model
 }
@@ -96,12 +91,12 @@ val convertToTensor = { data:dynamic ->
         val normalizedLabels = labelTensor.sub(labelMin).div(labelMax.sub(labelMin))
         
         object{
-        val inputs= normalizedInputs
-        val labels= normalizedLabels
-        val inputMax= inputMax
-        val inputMin= inputMin
-        val labelMax= labelMax
-        val labelMin= labelMin
+            val inputs= normalizedInputs
+            val labels= normalizedLabels
+            val inputMax= inputMax
+            val inputMin= inputMin
+            val labelMax= labelMax
+            val labelMin= labelMin
         }
         
     })
@@ -120,7 +115,7 @@ val trainModel = {model:dynamic, tensorData:dynamic ->
         val batchSize = 32
         val epochs = 100
         val shuffle = true
-        val callbacks = tfvis.show.fitCallbacks(object{val name= "Training Performance"},arrayOf("loss", "mse"),object{val height= 200;val callbacks= arrayOf("onEpochEnd")})
+        val callbacks = tfvis.show.fitCallbacks(object{val name="Training Performance"},arrayOf("loss","mse"),object{val height=200;val callbacks=arrayOf("onEpochEnd")})
     })
 }
 
@@ -148,14 +143,11 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
         .add(labelMin)
         
         // Un-normalize the data
-        Pair(unNormXs.dataSync(), unNormPreds.dataSync())
+        object{val xs=unNormXs.dataSync();val preds=unNormPreds.dataSync()}
     })
     
-    val xs = xs_preds.first
-    val preds = xs_preds.second
-    
-    val array_xs = Array.from(xs)
-    val array_preds = Array.from(preds)
+    val array_xs = Array.from(xs_preds.xs)
+    val array_preds = Array.from(xs_preds.preds)
     
     val predictedPoints = array_xs.map { value, index ->
         point(value,array_preds[index])
@@ -165,6 +157,6 @@ fun testModel(model:dynamic, inputData:dynamic, normalizationData:dynamic) {
         point(d.horsepower,d.mpg)
     }
     
-    tfvis.render.scatterplot(object{val name= "Model Predictions vs Original Data"}, object{val values= arrayOf(originalPoints, predictedPoints);val series= arrayOf("original", "predicted")}, object{val xLabel= "Horsepower";val yLabel= "MPG";val height= 300})
+    tfvis.render.scatterplot(object{val name="Model Predictions vs Original Data"}, object{val values=arrayOf(originalPoints,predictedPoints);val series=arrayOf("original","predicted")}, object{val xLabel="Horsepower";val yLabel="MPG";val height=300})
     println("All done!")
 }
