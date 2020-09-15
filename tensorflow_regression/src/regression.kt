@@ -1,3 +1,4 @@
+external val document:dynamic = definedExternally
 external val tf:dynamic = definedExternally
 external val tfvis:dynamic = definedExternally
 external val fetch:dynamic = definedExternally
@@ -5,8 +6,8 @@ external val Array:dynamic = definedExternally
 
 fun main() {
     
-    kotlin.browser.document.addEventListener("DOMContentLoaded", {
-        val msg = "welcome to kotlin for tensorflow.js!"
+    document.addEventListener("DOMContentLoaded", {
+        val msg = "welcome to kotlin tensorflow.js!"
         run()
         println(msg)
     })
