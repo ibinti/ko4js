@@ -38,7 +38,7 @@ suspend fun run(){
         val tensorData = convertToTensor(data)
         
         // Train the model  
-        (trainModel(model, tensorData) as Promise<dynamic>).await()
+        pawait(trainModel(model, tensorData))
         println("Done Training")
     
         // Make some predictions using the model and compare them to the
