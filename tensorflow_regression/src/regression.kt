@@ -18,10 +18,12 @@ fun main() {
 
 fun point(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
 
+suspend fun pawait(promise:dynamic):dynamic{return (promise as Promise<dynamic>).await()}
+
 suspend fun run(){
     try{
-        val carsDataReq = (fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json") as Promise<dynamic>).await()
-        val carsData = (carsDataReq.json() as Promise<dynamic>).await()
+        val carsDataReq = pawait(fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json"))
+        val carsData = pawait(carsDataReq.json())
         
         val data = carsData.map{car -> object{val mpg=car.Miles_per_Gallon;val horsepower=car.Horsepower}}.filter{car -> car.mpg != null && car.horsepower != null}
         
