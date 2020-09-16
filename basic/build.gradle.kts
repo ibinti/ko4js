@@ -37,6 +37,12 @@ tasks{
     }
 }
 
+//tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+//    kotlinOptions.suppressWarnings = false
+//    kotlinOptions.sourceMap = false
+//    kotlinOptions.outputFile = "ibinti"
+//}
+
 kotlin {
     sourceSets["main"].apply {    
         kotlin.srcDir("src") 
