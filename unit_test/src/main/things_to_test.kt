@@ -10,4 +10,6 @@ fun get_version_azureus(version:String):String {
 
 val jstype = {t:Any->js("typeof t")}
 
+val js_type = {t:dynamic->js("typeof t")}
+
 fun get_jstype(t:Any):String { return js("typeof t")}
