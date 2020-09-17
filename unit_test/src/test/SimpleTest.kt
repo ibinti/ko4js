@@ -19,6 +19,13 @@ class SimpleTest {
         assertEquals(test, label)
     }
     
+    @Test fun test_type() {
+        val test_type = { "sunny not sunhee" }
+        val test = js_type(test_type)
+        val label = "function"
+        assertEquals(test, label)
+    }
+    
     @Test fun test_version_azureus() {
     /**
      * Version number in Azureus-style. Generated from major and minor semver version.
