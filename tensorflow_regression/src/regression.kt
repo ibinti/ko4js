@@ -16,7 +16,7 @@ fun main() {
     
 }
 
-fun point(x:dynamic,y:dynamic):dynamic{return object{val x=x;val y=y}}
+fun point(x:dynamic,y:dynamic)=object{val x=x;val y=y}
 
 suspend fun pawait(promise:dynamic):dynamic{return (promise as Promise<dynamic>).await()}
 
