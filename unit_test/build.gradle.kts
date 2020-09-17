@@ -12,7 +12,10 @@ plugins {
 
 dependencies {
     implementation(kotlin("stdlib-js"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.3.9")
     testImplementation(kotlin("test-js"))
+    implementation(npm("simple-sha1","3.0.1"))
+    implementation(npm("sha.js","2.4.11"))
 }
 
 repositories {
@@ -39,7 +42,7 @@ kotlin {
                     useChromeHeadless()
                     //useSafari()
                     //useFirefox()
-                    useChrome()
+                    //useChrome()
                 }
             }
         }
