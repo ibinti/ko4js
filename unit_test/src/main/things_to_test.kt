@@ -6,6 +6,7 @@ import kotlinx.coroutines.*
 external val require:dynamic = definedExternally
 external val Array:dynamic = definedExternally
 external val setTimeout:dynamic = definedExternally
+external val setImmediate:dynamic = definedExternally
 
 val version_azureus = { version:String ->
     version.replace(Regex("""\d*."""), { val x = "${it.value}".toFloat() % 100; "0$x".takeLast(2)}).take(4)
