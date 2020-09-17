@@ -33,7 +33,7 @@ val simple_sha1_promise = {input:dynamic ->
 
 suspend fun pawait(promise:dynamic):dynamic{return (promise as Promise<dynamic>).await()}
 
-fun run_blocking( block: suspend () -> Unit): Promise<dynamic> = Promise<dynamic> { resolve:dynamic, _ -> GlobalScope.async{ block(); resolve() }}
+fun run_suspend( fun_code: suspend () -> Unit): Promise<dynamic> = Promise<dynamic> { resolve:dynamic, _ -> GlobalScope.async{ fun_code(); resolve() }}
 
 val shajs = require("sha.js")
 
