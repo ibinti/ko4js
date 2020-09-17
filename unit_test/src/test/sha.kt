@@ -11,7 +11,7 @@ class sha_test {
     "Use '--warning-mode all' to show the individual deprecation warnings."
     )
     
-    @Test fun sha1_0() = run_blocking {
+    @Test fun sha1_0() = run_suspend {
         println("""
             |sha1_0()
             |""".trimMargin())
@@ -27,7 +27,7 @@ class sha_test {
         }
     }
     
-    @Test fun sha1_1() = run_blocking {
+    @Test fun sha1_1() = run_suspend {
         println("""| 
             |sha1_1()
             |""".trimMargin())
@@ -43,7 +43,7 @@ class sha_test {
         }
     }
     
-    @Test fun sha1_2() = run_blocking {
+    @Test fun sha1_2() = run_suspend {
         println("""| 
             |sha1_2()
             |""".trimMargin())
