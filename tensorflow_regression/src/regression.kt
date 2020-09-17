@@ -1,26 +1,4 @@
-import kotlin.js.Promise
-import kotlinx.coroutines.*
-external val document:dynamic = definedExternally
-external val tf:dynamic = definedExternally
-external val tfvis:dynamic = definedExternally
-external val fetch:dynamic = definedExternally
-external val Array:dynamic = definedExternally
-
-fun main() {
-    
-    document.addEventListener("DOMContentLoaded", {
-        val msg = "welcome to kotlin tensorflow.js!"
-        GlobalScope.async{run()}
-        println(msg)
-    })
-    
-}
-
-fun point(x:dynamic,y:dynamic)=object{val x=x;val y=y}
-
-suspend fun pawait(promise:dynamic):dynamic{return (promise as Promise<dynamic>).await()}
-
-suspend fun run(){
+suspend fun regression(){
     try{
         val carsDataReq = pawait(fetch("https://storage.googleapis.com/tfjs-tutorials/carsData.json"))
         val carsData = pawait(carsDataReq.json())
