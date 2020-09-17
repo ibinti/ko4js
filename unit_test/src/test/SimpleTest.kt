@@ -1,7 +1,5 @@
 package ko4js
-
 import kotlin.test.*
-external val require:dynamic = definedExternally
 
 class SimpleTest {
 
