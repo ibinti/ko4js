@@ -6,7 +6,9 @@ external val JSON:dynamic = definedExternally
 
 fun main() {
     
-    println("welcome to kotlin nodejs express")
+    println("""
+        
+        welcome to ibinti world!""".trimIndent())
     
     express_server()
 
@@ -16,6 +18,7 @@ fun main() {
 helper
  */
 fun printjo(jo:dynamic){val msg = JSON.stringify(jo);println(msg)}
+suspend fun pawait(promise:dynamic):dynamic{return (promise as Promise<dynamic>).await()}
 
 val express_server = {
     
@@ -23,7 +26,7 @@ val express_server = {
     val fetch = require("node-fetch")
     
     val app = express()
-    val port = 8055
+    val port = 2020
     
     app.get("/",  {req, res -> GlobalScope.async{
             val jo:dynamic = object{}
@@ -53,7 +56,7 @@ val express_server = {
             printjo(jo)
     } })
     
-    app.get("/users/:user_id/books/:book_id", {req, res -> 
+    app.get("/user/:user_id/book/:book_id", {req, res -> 
         res.send(req.params)
         printjo(req.params)       
     })
@@ -73,10 +76,10 @@ val express_server = {
         })
     }})
     
-    app.get("/fetch2", {req, res -> GlobalScope.async { 
+    app.get("/pawait", {req, res -> GlobalScope.async { 
         try{
-            val response = (fetch("https://ibinti.com/ko4js") as Promise<dynamic>).await()
-            val body = (response.text() as Promise<dynamic>).await()
+            val response = pawait(fetch("https://ibinti.com/ko4js"))
+            val body = pawait(response.text())
             res.statusCode = 200
             res.setHeader("Content-Type", "text/html") 
             res.send(body)
@@ -85,5 +88,14 @@ val express_server = {
         }
     }})
     
-    app.listen(port, { println("express listening on port ${port}!")})
+    app.listen(port, { println(""" 
+        |nodejs express listening on port ${port}
+        |
+        |open following urls with a web browser one bye one
+        |1. http://localhost:${port}
+        |2. http://localhost:${port}/user/999/book/588
+        |3. http://localhost:${port}/fetch
+        |4. http://localhost:${port}/pawait
+        | 
+    """.trimMargin()) })
 }
