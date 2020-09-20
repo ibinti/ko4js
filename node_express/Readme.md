@@ -1,6 +1,6 @@
 # Nodejs Express Server Example in Kotlin
 
-## To build js code in the terminal
+## To build ibinti.js in the terminal
 ```
 ./gradlew 
 ```
