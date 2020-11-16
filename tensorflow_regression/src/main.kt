@@ -10,7 +10,7 @@ fun main() {
     
     document.addEventListener("DOMContentLoaded", {
         val msg = "welcome to tensorflow.js!"
-        GlobalScope.async {tensorflow()}
+        GlobalScope.async{tensorflow()}
         GlobalScope.async{regression()}
         println(msg)
     })
