@@ -1,4 +1,4 @@
-# This is ko4js
+# This is ko4.js
 
 ## Kotlin for JavaScript
 
