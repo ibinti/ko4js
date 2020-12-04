@@ -8,4 +8,4 @@ This repo consists of sub directories. Each directory is a complete standalone p
  
 Project build is done with Gradle Kotlin DSL. To build a browser project, open the terminal and cd to the directory of your interest. Run <code>./gradlew</code>, and then open html file to see the action in the browser.
 
-upldate<a href="https://ibinti.com" target="_blank">https://ibinti.com</a>
+<a href="https://ibinti.com" target="_blank">https://ibinti.com</a>
