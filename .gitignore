@@ -1,8 +1,6 @@
 .idea
 .gradle
 build
-js
-*.js
 *.iml
 .DS_Store
 local.properties
